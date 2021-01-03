@@ -7,12 +7,12 @@ export default {
 		quartenary: '',
 		quinary: '',
 		senary: '',
-		white: '',
-		black: '',
+		white: '#fff',
+		black: '#000',
 		messages: {
-			success: '',
-			error: '',
-			info: '',
+			success: 'green',
+			error: 'red',
+			info: 'yellow',
 		},
 	},
 	fonts: {

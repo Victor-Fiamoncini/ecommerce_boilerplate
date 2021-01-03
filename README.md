@@ -1,6 +1,6 @@
-# Blog Boilerplate
+# Ecommerce Boilerplate 🛍
 
-React/Next blog boilerplate
+React/Next/Strapi ecommerce boilerplate
 
 ----------
 Released in 2021. This project is under the MIT license.
