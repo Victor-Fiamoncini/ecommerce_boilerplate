@@ -1,5 +1,12 @@
 import React from 'react'
-import Document, { DocumentContext, DocumentInitialProps } from 'next/document'
+import Document, {
+	DocumentContext,
+	DocumentInitialProps,
+	Html,
+	Head,
+	Main,
+	NextScript,
+} from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
@@ -28,5 +35,32 @@ export default class MyDocument extends Document {
 		} finally {
 			sheet.seal()
 		}
+	}
+
+	public render(): JSX.Element {
+		return (
+			<Html lang="pt-br">
+				<Head>
+					<meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
+					<meta httpEquiv="X-UA-Compatible" content="IE=7" />
+					<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
+					<meta name="theme-color" content="#000000" />
+					<meta name="msapplication-navbutton-color" content="#000000" />
+					<meta
+						name="apple-mobile-web-app-status-bar-style"
+						content="#000000"
+					/>
+					<link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+					/>
+				</Head>
+				<body>
+					<Main />
+					<NextScript />
+				</body>
+			</Html>
+		)
 	}
 }
