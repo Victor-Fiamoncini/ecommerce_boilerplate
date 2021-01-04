@@ -12,6 +12,7 @@ declare module 'styled-components' {
 			senary: string
 			white: string
 			black: string
+			background: string
 			messages: {
 				success: string
 				error: string

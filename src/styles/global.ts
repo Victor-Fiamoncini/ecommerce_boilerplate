@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { rem } from 'polished'
 
 export default createGlobalStyle`
@@ -10,10 +10,22 @@ export default createGlobalStyle`
 	}
 
 	body {
-		background: ${props => props.theme.colors.primary};
-		color: ${props => props.theme.colors.secundary};
+		background: ${props => props.theme.colors.background};
+		color: ${props => props.theme.colors.primary};
 		font-family: ${props => props.theme.fonts.primary} Arial, Helvetica, sans-serif;
 		-webkit-font-smoothing: antialiased;
+		::-webkit-scrollbar {
+			width: 10px;
+		}
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
+		::-webkit-scrollbar-thumb {
+			background: ${props => props.theme.colors.primary};
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
 	}
 
 	body,
@@ -35,4 +47,10 @@ export default createGlobalStyle`
 	li {
 		list-style: none;
 	}
+`
+
+export const GuestContainer = styled.div`
+	margin: 0 auto;
+	max-width: 1240px;
+	padding: 10px;
 `

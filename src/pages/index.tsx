@@ -1,19 +1,37 @@
 import React from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
-import logo from '../assets/logo.png'
+import products from '../../products.json'
+
+import { fromImageToUrl } from '../utils/urls'
+
+import { ProductsList, ProductListItem } from '../styles/pages/home'
+import { GuestContainer } from '../styles/global'
 
 const Home: React.FC = () => {
 	return (
-		<div>
+		<GuestContainer>
 			<Head>
-				<title>Hello</title>
+				<title>Home</title>
 			</Head>
-			<main>
-				<h1>Hello</h1>
-				<img src={logo} alt="" />
-			</main>
-		</div>
+			<ProductsList>
+				<h1>Products</h1>
+				{products.map(product => (
+					<ProductListItem key={product.id}>
+						<Link href={`/products/${product.slug}`}>
+							<a>
+								<div>
+									<img src={fromImageToUrl(product.image.url)} />
+									<p>{product.name}</p>
+									<strong>R$ {product.price}</strong>
+								</div>
+							</a>
+						</Link>
+					</ProductListItem>
+				))}
+			</ProductsList>
+		</GuestContainer>
 	)
 }
 
