@@ -1,8 +1,9 @@
 import React from 'react'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import products from '../../products.json'
+import { strapiApi } from '../services/apiClients'
 
 import fromImageToUrl from '../utils/fromImageToUrl'
 import formatMoney from '../utils/formatMoney'
@@ -10,7 +11,13 @@ import formatMoney from '../utils/formatMoney'
 import { ProductsList, ProductListItem } from '../styles/pages/home'
 import { GuestContainer } from '../styles/global'
 
-const Home: React.FC = () => {
+import { Product } from '../types/Product'
+
+interface HomeProps {
+	products: Product[]
+}
+
+const Home: React.FC<HomeProps> = ({ products }) => {
 	return (
 		<GuestContainer>
 			<Head>
@@ -34,6 +41,16 @@ const Home: React.FC = () => {
 			</ProductsList>
 		</GuestContainer>
 	)
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+	const products = await strapiApi.get('/products')
+
+	return {
+		props: {
+			products: products.data,
+		},
+	}
 }
 
 export default Home

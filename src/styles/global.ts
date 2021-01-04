@@ -53,5 +53,5 @@ export default createGlobalStyle`
 export const GuestContainer = styled.div`
 	margin: 0 auto;
 	max-width: 1240px;
-	padding: 10px;
+	padding: 14px;
 `

@@ -13,6 +13,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "next": "^10.0.0",
     "next-images": "^1.6.2",
     "polished": "^4.0.5",

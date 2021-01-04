@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 
-import products from '../../../products.json'
+// import products from '../../../products.json'
 
 import fromImageToUrl from '../../utils/fromImageToUrl'
 import formatMoney from '../../utils/formatMoney'
@@ -12,7 +12,7 @@ import {
 } from '../../styles/pages/products/product'
 import { GuestContainer } from '../../styles/global'
 
-const product = products[0]
+const product = {}
 
 const Product: React.FC = () => {
 	return (
