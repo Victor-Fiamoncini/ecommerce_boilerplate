@@ -1,4 +1,4 @@
-export interface ProductImage {
+export interface IProductImage {
 	id: number
 	url: string
 	formats: {
@@ -8,12 +8,13 @@ export interface ProductImage {
 	}
 }
 
-export interface Product {
+export interface IProduct {
 	id: number
 	name: string
+	content: string
 	meta_description: string
 	meta_title: string
 	price: number
 	slug: string
-	image: ProductImage
+	image: IProductImage
 }

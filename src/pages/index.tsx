@@ -11,13 +11,13 @@ import formatMoney from '../utils/formatMoney'
 import { ProductsList, ProductListItem } from '../styles/pages/home'
 import { GuestContainer } from '../styles/global'
 
-import { Product } from '../types/Product'
+import { IProduct } from '../types/Product'
 
-interface HomeProps {
-	products: Product[]
+interface IHomeProps {
+	products: IProduct[]
 }
 
-const Home: React.FC<HomeProps> = ({ products }) => {
+const Home: React.FC<IHomeProps> = ({ products }) => {
 	return (
 		<GuestContainer>
 			<Head>
@@ -44,7 +44,7 @@ const Home: React.FC<HomeProps> = ({ products }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const products = await strapiApi.get('/products')
+	const products = await strapiApi.get<IProduct[]>('/products')
 
 	return {
 		props: {

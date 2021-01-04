@@ -1,7 +1,9 @@
 import React from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
+import { ParsedUrlQuery } from 'querystring'
 
-// import products from '../../../products.json'
+import { strapiApi } from '../../services/apiClients'
 
 import fromImageToUrl from '../../utils/fromImageToUrl'
 import formatMoney from '../../utils/formatMoney'
@@ -12,9 +14,17 @@ import {
 } from '../../styles/pages/products/product'
 import { GuestContainer } from '../../styles/global'
 
-const product = {}
+import { IProduct } from '../../types/Product'
 
-const Product: React.FC = () => {
+interface IProductProps {
+	product: IProduct
+}
+
+interface IProductStaticPaths extends ParsedUrlQuery {
+	slug: string
+}
+
+const Product: React.FC<IProductProps> = ({ product }) => {
 	return (
 		<GuestContainer>
 			<Head>
@@ -31,6 +41,32 @@ const Product: React.FC = () => {
 			</ProductItemContainer>
 		</GuestContainer>
 	)
+}
+
+export const getStaticProps: GetStaticProps = async context => {
+	const { slug } = context.params as IProductStaticPaths
+
+	const products = await strapiApi.get<IProduct[]>(`/products/?slug=${slug}`)
+	const [firstProduct] = products.data
+
+	return {
+		props: {
+			product: firstProduct,
+		},
+	}
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const products = await strapiApi.get<IProduct[]>('/products')
+
+	return {
+		paths: products.data.map(product => ({
+			params: {
+				slug: product.slug,
+			},
+		})),
+		fallback: false,
+	}
 }
 
 export default Product
