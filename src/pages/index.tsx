@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 import products from '../../products.json'
 
-import { fromImageToUrl } from '../utils/urls'
+import fromImageToUrl from '../utils/fromImageToUrl'
+import formatMoney from '../utils/formatMoney'
 
 import { ProductsList, ProductListItem } from '../styles/pages/home'
 import { GuestContainer } from '../styles/global'
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
 								<div>
 									<img src={fromImageToUrl(product.image.url)} />
 									<p>{product.name}</p>
-									<strong>R$ {product.price}</strong>
+									<strong>R$ {formatMoney(product.price)}</strong>
 								</div>
 							</a>
 						</Link>

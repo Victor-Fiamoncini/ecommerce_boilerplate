@@ -46,6 +46,7 @@ export default createGlobalStyle`
 	ol,
 	li {
 		list-style: none;
+		text-decoration: none;
 	}
 `
 
