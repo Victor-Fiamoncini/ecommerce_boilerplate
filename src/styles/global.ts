@@ -24,7 +24,7 @@ export default createGlobalStyle`
 			background: ${props => props.theme.colors.primary};
 		}
 		::-webkit-scrollbar-thumb:hover {
-			background: #555;
+			background: ${props => props.theme.colors.quartenary};
 		}
 	}
 
@@ -53,5 +53,5 @@ export default createGlobalStyle`
 export const GuestContainer = styled.div`
 	margin: 0 auto;
 	max-width: 1240px;
-	padding: 10px 12px;
+	padding: 14px 10px;
 `

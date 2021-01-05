@@ -7,7 +7,8 @@ export const ProductItemContainer = styled.section`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	h1 {
+	h2 {
+		font-size: ${rem(28)};
 		margin-bottom: 22px;
 	}
 `

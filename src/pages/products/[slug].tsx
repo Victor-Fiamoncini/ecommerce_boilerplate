@@ -32,7 +32,7 @@ const Product: React.FC<IProductProps> = ({ product }) => {
 				<title>{product.name}</title>
 			</Head>
 			<ProductItemContainer>
-				<h1>{product.name}</h1>
+				<h2>{product.name}</h2>
 				<ProductItem>
 					<img src={fromImageToUrl(product.image.url)} />
 					<strong>R$ {formatMoney(product.price)}</strong>
@@ -41,19 +41,6 @@ const Product: React.FC<IProductProps> = ({ product }) => {
 			</ProductItemContainer>
 		</GuestContainer>
 	)
-}
-
-export const getStaticProps: GetStaticProps = async context => {
-	const { slug } = context.params as IProductStaticPaths
-
-	const products = await strapiApi.get<IProduct[]>(`/products/?slug=${slug}`)
-	const [firstProduct] = products.data
-
-	return {
-		props: {
-			product: firstProduct,
-		},
-	}
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -65,7 +52,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
 				slug: product.slug,
 			},
 		})),
-		fallback: false,
+		fallback: true,
+	}
+}
+
+export const getStaticProps: GetStaticProps = async context => {
+	const { slug } = context.params as IProductStaticPaths
+
+	const products = await strapiApi.get<IProduct[]>(`/products/?slug=${slug}`)
+	const [firstProduct] = products.data
+
+	return {
+		revalidate: 3600,
+		props: {
+			product: firstProduct,
+		},
 	}
 }
 

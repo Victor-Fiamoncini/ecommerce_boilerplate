@@ -4,7 +4,7 @@ export default {
 		primary: '#8257e6',
 		secundary: '#121214',
 		tertiary: '#e1e1e6',
-		quartenary: '',
+		quartenary: '#555',
 		quinary: '',
 		senary: '',
 		white: '#fff',

@@ -8,7 +8,11 @@ import { strapiApi } from '../services/apiClients'
 import fromImageToUrl from '../utils/fromImageToUrl'
 import formatMoney from '../utils/formatMoney'
 
-import { ProductsList, ProductListItem } from '../styles/pages/home'
+import {
+	ProductsListContainer,
+	ProductsList,
+	ProductListItem,
+} from '../styles/pages/home'
 import { GuestContainer } from '../styles/global'
 
 import { IProduct } from '../types/Product'
@@ -23,22 +27,24 @@ const Home: React.FC<IHomeProps> = ({ products }) => {
 			<Head>
 				<title>Home</title>
 			</Head>
-			<ProductsList>
-				<h1>Products</h1>
-				{products.map(product => (
-					<ProductListItem key={product.id}>
-						<Link href={`/products/${product.slug}`}>
-							<a>
-								<div>
-									<img src={fromImageToUrl(product.image.url)} />
-									<p>{product.name}</p>
-									<strong>R$ {formatMoney(product.price)}</strong>
-								</div>
-							</a>
-						</Link>
-					</ProductListItem>
-				))}
-			</ProductsList>
+			<ProductsListContainer>
+				<h2>Products</h2>
+				<ProductsList>
+					{products.map(product => (
+						<ProductListItem key={product.id}>
+							<Link href={`/products/${product.slug}`}>
+								<a>
+									<div>
+										<img src={fromImageToUrl(product.image.url)} />
+										<p>{product.name}</p>
+										<strong>R$ {formatMoney(product.price)}</strong>
+									</div>
+								</a>
+							</Link>
+						</ProductListItem>
+					))}
+				</ProductsList>
+			</ProductsListContainer>{' '}
 		</GuestContainer>
 	)
 }

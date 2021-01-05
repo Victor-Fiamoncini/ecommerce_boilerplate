@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { ThemeProvider } from 'styled-components'
-
-import defaultTheme from '../styles/themes/default'
+import { ThemeProvider } from './ThemeContext'
 
 const AppProvider: React.FC = ({ children }) => {
-	return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>
+	return <ThemeProvider>{children}</ThemeProvider>
 }
 
 export default AppProvider
