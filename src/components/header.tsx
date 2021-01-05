@@ -16,8 +16,6 @@ const Header: React.FC = () => {
 
 	const { user } = useAuth()
 
-	console.log(user)
-
 	return (
 		<HeaderContainer>
 			{pathname !== '/' && (

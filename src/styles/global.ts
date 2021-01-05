@@ -34,6 +34,11 @@ export default createGlobalStyle`
 		font-size: ${rem(16)};
 	}
 
+	input,
+	button {
+		border: none;
+	}
+
 	button {
 		cursor: pointer;
 	}

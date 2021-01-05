@@ -15,6 +15,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 		async (email: string) => {
 			setData({ ...data, user: { email } })
 
+			console.log('AQUIII', email)
+
 			router.push('/')
 		},
 		[data, router]
