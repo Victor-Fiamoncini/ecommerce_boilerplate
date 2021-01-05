@@ -3,10 +3,20 @@ import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { FaLongArrowAltLeft } from 'react-icons/fa'
 
-import { HeaderContainer, GoBackToHomeLink } from '../styles/components/header'
+import { useAuth } from '../context/AuthContext'
+
+import {
+	HeaderContainer,
+	GoBackToHomeLink,
+	GuestAuthLinksContainer,
+} from '../styles/components/header'
 
 const Header: React.FC = () => {
 	const { pathname } = useRouter()
+
+	const { user } = useAuth()
+
+	console.log(user)
 
 	return (
 		<HeaderContainer>
@@ -22,6 +32,17 @@ const Header: React.FC = () => {
 					<h1>Ecommerce Boilerplate</h1>
 				</a>
 			</Link>
+			<GuestAuthLinksContainer>
+				{user ? (
+					<Link href="/account">
+						<a>{user.email}</a>
+					</Link>
+				) : (
+					<Link href="/login">
+						<a>Login</a>
+					</Link>
+				)}
+			</GuestAuthLinksContainer>
 		</HeaderContainer>
 	)
 }
