@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { FaLongArrowAltLeft } from 'react-icons/fa'
@@ -14,7 +14,16 @@ import {
 const Header: React.FC = () => {
 	const { pathname } = useRouter()
 
-	const { user } = useAuth()
+	const { user, logoutUser } = useAuth()
+
+	const handleLogoutFormSubmit = useCallback(
+		(event: MouseEvent<HTMLAnchorElement>) => {
+			event.preventDefault()
+
+			logoutUser()
+		},
+		[logoutUser]
+	)
 
 	return (
 		<HeaderContainer>
@@ -31,10 +40,15 @@ const Header: React.FC = () => {
 				</a>
 			</Link>
 			<GuestAuthLinksContainer>
-				{user ? (
-					<Link href="/account">
-						<a>{user.email}</a>
-					</Link>
+				{user.isAuthenticated ? (
+					<>
+						<Link href="/account">
+							<a>{user.email}</a>
+						</Link>
+						<Link href="/">
+							<a onClick={handleLogoutFormSubmit}>Logout</a>
+						</Link>
+					</>
 				) : (
 					<Link href="/login">
 						<a>Login</a>

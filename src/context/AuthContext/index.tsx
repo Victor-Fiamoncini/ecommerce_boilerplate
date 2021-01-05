@@ -1,32 +1,57 @@
-import React, { useCallback, useContext, useState } from 'react'
-import { createContext } from 'react'
+import React, {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useState,
+} from 'react'
 import { useRouter } from 'next/router'
+import { Magic } from 'magic-sdk'
+
+import { MAGIC_PUBLIC_KEY } from '../../config/urls'
 
 import { IAuthContextData, IAuthState } from './types'
 
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData)
 
 export const AuthProvider: React.FC = ({ children }) => {
-	const [data, setData] = useState<IAuthState>({} as IAuthState)
+	const [data, setData] = useState<IAuthState>({
+		user: {
+			email: '',
+			isAuthenticated: false,
+		},
+		magic: null,
+	} as IAuthState)
 
 	const router = useRouter()
 
 	const loginUser = useCallback(
 		async (email: string) => {
-			setData({ ...data, user: { email } })
+			try {
+				console.log(MAGIC_PUBLIC_KEY)
 
-			console.log('AQUIII', email)
+				await data.magic?.auth.loginWithMagicLink({ email })
 
-			router.push('/')
+				setData({ ...data, user: { email, isAuthenticated: true } })
+
+				router.push('/')
+			} catch {
+				setData({ ...data, user: { email: '', isAuthenticated: false } })
+			}
 		},
 		[data, router]
 	)
 
 	const logoutUser = useCallback(() => {
-		setData({ ...data, user: {} } as IAuthState)
+		setData({ ...data, user: { email: '', isAuthenticated: false } })
 
 		router.push('/')
 	}, [data, router])
+
+	useEffect(() => {
+		setData({ ...data, magic: new Magic(MAGIC_PUBLIC_KEY) })
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<AuthContext.Provider value={{ user: data.user, loginUser, logoutUser }}>

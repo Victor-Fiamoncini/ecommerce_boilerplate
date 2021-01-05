@@ -9,6 +9,8 @@ import Document, {
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
+import favicon from '../assets/favicon.png'
+
 export default class MyDocument extends Document {
 	public static async getInitialProps(
 		ctx: DocumentContext
@@ -23,6 +25,7 @@ export default class MyDocument extends Document {
 				})
 
 			const initialProps = await Document.getInitialProps(ctx)
+
 			return {
 				...initialProps,
 				styles: (
@@ -50,11 +53,7 @@ export default class MyDocument extends Document {
 						name="apple-mobile-web-app-status-bar-style"
 						content="#000000"
 					/>
-					<link rel="icon" href="%PUBLIC_URL%/favicon.png" />
-					<link
-						rel="stylesheet"
-						href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-					/>
+					<link rel="shortcut icon" href={favicon} type="image/x-icon" />
 				</Head>
 				<body>
 					<Main />

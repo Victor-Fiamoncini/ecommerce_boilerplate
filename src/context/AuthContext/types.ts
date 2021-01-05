@@ -1,9 +1,13 @@
+import { Magic } from 'magic-sdk'
+
 export interface IUser {
 	email: string
+	isAuthenticated: boolean
 }
 
 export interface IAuthState {
 	user: IUser
+	magic: Magic | null
 }
 
 export interface IAuthContextData {

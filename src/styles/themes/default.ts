@@ -11,9 +11,9 @@ export default {
 		black: '#000',
 		background: '#f1f1f1',
 		messages: {
-			success: 'green',
-			error: 'red',
-			info: 'yellow',
+			success: '',
+			error: '',
+			info: '',
 		},
 	},
 	fonts: {

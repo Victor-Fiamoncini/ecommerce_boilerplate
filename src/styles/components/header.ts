@@ -35,7 +35,7 @@ export const GuestAuthLinksContainer = styled.div`
 		color: ${props => props.theme.colors.white};
 		font-weight: 600;
 		&:not(:last-of-type) {
-			margin-right: 8px;
+			margin-right: 16px;
 		}
 	}
 `
