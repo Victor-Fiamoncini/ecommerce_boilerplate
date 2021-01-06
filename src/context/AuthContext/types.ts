@@ -7,11 +7,10 @@ export interface IUser {
 
 export interface IAuthState {
 	user: IUser
-	magic: Magic | null
 }
 
 export interface IAuthContextData {
 	user: IUser
 	loginUser: (email: string) => Promise<void>
-	logoutUser: () => void
+	logoutUser: () => Promise<void>
 }

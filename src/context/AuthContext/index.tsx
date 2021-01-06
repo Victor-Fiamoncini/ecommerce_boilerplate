@@ -12,6 +12,8 @@ import { MAGIC_PUBLIC_KEY } from '../../config/urls'
 
 import { IAuthContextData, IAuthState } from './types'
 
+let magic: Magic
+
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData)
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -20,7 +22,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 			email: '',
 			isAuthenticated: false,
 		},
-		magic: null,
 	} as IAuthState)
 
 	const router = useRouter()
@@ -28,9 +29,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 	const loginUser = useCallback(
 		async (email: string) => {
 			try {
-				console.log(MAGIC_PUBLIC_KEY)
+				await magic.auth.loginWithMagicLink({ email })
 
-				await data.magic?.auth.loginWithMagicLink({ email })
+				// await magic.user.getIdToken()
 
 				setData({ ...data, user: { email, isAuthenticated: true } })
 
@@ -42,19 +43,28 @@ export const AuthProvider: React.FC = ({ children }) => {
 		[data, router]
 	)
 
-	const logoutUser = useCallback(() => {
-		setData({ ...data, user: { email: '', isAuthenticated: false } })
+	const logoutUser = useCallback(async () => {
+		try {
+			await magic.user.logout()
+		} finally {
+			setData({ ...data, user: { email: '', isAuthenticated: false } })
 
-		router.push('/')
+			router.push('/')
+		}
 	}, [data, router])
 
 	useEffect(() => {
-		setData({ ...data, magic: new Magic(MAGIC_PUBLIC_KEY) })
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+		magic = new Magic(MAGIC_PUBLIC_KEY)
+	}, []) // eslint-disable-line
 
 	return (
-		<AuthContext.Provider value={{ user: data.user, loginUser, logoutUser }}>
+		<AuthContext.Provider
+			value={{
+				user: data.user,
+				loginUser,
+				logoutUser,
+			}}
+		>
 			{children}
 		</AuthContext.Provider>
 	)
