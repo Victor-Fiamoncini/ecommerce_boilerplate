@@ -12,7 +12,7 @@ import { MAGIC_PUBLIC_KEY } from '../../config/urls'
 
 import { IAuthContextData, IAuthState } from './types'
 
-let magic: Magic
+let magic: Magic | null
 
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData)
 
@@ -29,9 +29,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 	const loginUser = useCallback(
 		async (email: string) => {
 			try {
-				await magic.auth.loginWithMagicLink({ email })
-
-				// await magic.user.getIdToken()
+				await magic?.auth.loginWithMagicLink({ email })
 
 				setData({ ...data, user: { email, isAuthenticated: true } })
 
@@ -45,8 +43,20 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 	const logoutUser = useCallback(async () => {
 		try {
-			await magic.user.logout()
+			await magic?.user.logout()
 		} finally {
+			setData({ ...data, user: { email: '', isAuthenticated: false } })
+
+			router.push('/')
+		}
+	}, [data, router])
+
+	const getToken = useCallback(async () => {
+		try {
+			const token = await magic?.user.getIdToken()
+
+			return token
+		} catch {
 			setData({ ...data, user: { email: '', isAuthenticated: false } })
 
 			router.push('/')
@@ -63,6 +73,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 				user: data.user,
 				loginUser,
 				logoutUser,
+				getToken,
 			}}
 		>
 			{children}

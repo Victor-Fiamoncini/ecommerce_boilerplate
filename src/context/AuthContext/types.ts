@@ -1,16 +1,15 @@
-import { Magic } from 'magic-sdk'
-
 export interface IUser {
 	email: string
 	isAuthenticated: boolean
 }
 
 export interface IAuthState {
-	user: IUser
+	user?: IUser
 }
 
 export interface IAuthContextData {
-	user: IUser
+	user?: IUser
 	loginUser: (email: string) => Promise<void>
 	logoutUser: () => Promise<void>
+	getToken: () => Promise<string | undefined>
 }
