@@ -15,6 +15,10 @@ export default {
 			error: '',
 			info: '',
 		},
+		payment: {
+			paid: '#66ff33',
+			unpaid: '#ffcc00',
+		},
 	},
 	fonts: {
 		primary: 'Roboto',

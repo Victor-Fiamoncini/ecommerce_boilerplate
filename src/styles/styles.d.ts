@@ -18,6 +18,10 @@ declare module 'styled-components' {
 				error: string
 				info: string
 			}
+			payment: {
+				paid: string
+				unpaid: string
+			}
 		}
 		fonts: {
 			primary: string

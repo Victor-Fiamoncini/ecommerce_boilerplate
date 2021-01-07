@@ -6,7 +6,8 @@ export interface IOrder {
 	id: string
 	product: IProduct
 	total: number
-	status: number
+	status: string
+	created_at: Date
 }
 
 export interface IOrderState {

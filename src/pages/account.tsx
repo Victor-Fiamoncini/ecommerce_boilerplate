@@ -9,6 +9,7 @@ import {
 	AccountContainer,
 	OrdersListContainer,
 	OrdersList,
+	OrdersListItem,
 } from '../styles/pages/account'
 
 const Account: React.FC = () => {
@@ -17,7 +18,11 @@ const Account: React.FC = () => {
 
 	useEffect(() => {
 		async function getAuthOrders() {
-			await getOrders((await getToken()) || '')
+			const token = await getToken()
+
+			if (token) {
+				await getOrders(token)
+			}
 		}
 
 		getAuthOrders()
@@ -38,7 +43,20 @@ const Account: React.FC = () => {
 					<h3>Orders</h3>
 					<OrdersList>
 						{!!orders.length &&
-							orders.map(order => <li key={order.id}>{order.product.name}</li>)}
+							orders.map(order => (
+								<OrdersListItem key={order.id} paid={order.status === 'paid'}>
+									<header>
+										<strong>{order.product.name}</strong>
+									</header>
+									<div>
+										<strong>R$ {order.total}</strong>
+										<strong>
+											{new Date(order.created_at).toLocaleDateString('pt-BR')}
+										</strong>
+									</div>
+									<p>{order.status}</p>
+								</OrdersListItem>
+							))}
 					</OrdersList>
 				</OrdersListContainer>
 			</AccountContainer>

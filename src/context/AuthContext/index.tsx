@@ -55,6 +55,10 @@ export const AuthProvider: React.FC = ({ children }) => {
 		try {
 			const token = await magic?.user.getIdToken()
 
+			if (!token) {
+				throw new Error('Unauthorized')
+			}
+
 			return token
 		} catch {
 			setData({ ...data, user: { email: '', isAuthenticated: false } })

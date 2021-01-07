@@ -11,11 +11,15 @@ export const OrderProvider: React.FC = ({ children }) => {
 
 	const getOrders = useCallback(
 		async (authToken: string) => {
-			const orders = await strapiApi.get('/orders', {
-				headers: { Authorization: `Bearer ${authToken}` },
-			})
+			try {
+				const orders = await strapiApi.get('/orders', {
+					headers: { Authorization: `Bearer ${authToken}` },
+				})
 
-			setData({ ...data, orders: orders.data })
+				setData({ ...data, orders: orders.data })
+			} catch {
+				setData({ ...data, orders: [] })
+			}
 		},
 		[data]
 	)

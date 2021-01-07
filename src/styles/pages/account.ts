@@ -1,5 +1,10 @@
+/* eslint-disable indent */
 import styled from 'styled-components'
 import { rem } from 'polished'
+
+interface IOrderListItemProps {
+	paid: boolean
+}
 
 export const AccountContainer = styled.section`
 	text-align: center;
@@ -32,14 +37,35 @@ export const OrdersList = styled.ul`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	li {
-		background: ${props => props.theme.colors.white};
-		border-radius: 22px;
-		padding: 16px;
-		font-weight: 600;
-		font-size: ${rem(18)};
-		&:not(:last-of-type) {
-			margin-bottom: 12px;
+`
+
+export const OrdersListItem = styled.li<IOrderListItemProps>`
+	background: ${props => props.theme.colors.white};
+	border-radius: 22px;
+	padding: 16px;
+	font-weight: 600;
+	font-size: ${rem(18)};
+	&:not(:last-of-type) {
+		margin-bottom: 12px;
+	}
+	header {
+		margin-bottom: 10px;
+	}
+	div {
+		display: flex;
+		justify-content: space-around;
+		margin-bottom: 10px;
+		strong {
+			color: ${props => props.theme.colors.secundary};
 		}
+	}
+	> p {
+		display: inline-block;
+		color: ${props => props.theme.colors.white};
+		padding: 4px 12px;
+		border-radius: 22px;
+		background: ${({ paid, theme }) => {
+			return paid ? theme.colors.payment.paid : theme.colors.payment.unpaid
+		}};
 	}
 `
