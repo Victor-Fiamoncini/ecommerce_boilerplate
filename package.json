@@ -1,5 +1,5 @@
 {
-  "name": "blog_boilerplate",
+  "name": "ecommerce_boilerplate",
   "version": "1.0.0",
   "private": true,
   "author": {
@@ -14,25 +14,25 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.11.0",
+    "autoprefixer": "^10.2.0",
     "axios": "^0.21.1",
     "magic-sdk": "^4.0.2",
     "next": "^10.0.0",
     "next-images": "^1.6.2",
-    "polished": "^4.0.5",
+    "postcss": "^8.2.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-icons": "^4.1.0",
-    "styled-components": "^5.2.1"
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/node": "^14.14.19",
     "@types/react": "^17.0.0",
-    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "eslint": "^7.17.0",
+    "eslint-config-nextjs": "^1.0.6",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.22.0",

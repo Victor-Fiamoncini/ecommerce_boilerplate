@@ -8,13 +8,6 @@ import { strapiApi } from '../services/apiClients'
 import fromImageToUrl from '../utils/fromImageToUrl'
 import formatMoney from '../utils/formatMoney'
 
-import {
-	ProductsListContainer,
-	ProductsList,
-	ProductListItem,
-} from '../styles/pages/home'
-import { GuestContainer } from '../styles/global'
-
 import { IProduct } from '../types/Product'
 
 interface IHomeProps {
@@ -23,11 +16,11 @@ interface IHomeProps {
 
 const Home: React.FC<IHomeProps> = ({ products }) => {
 	return (
-		<GuestContainer>
-			<Head>
-				<title>Home</title>
-			</Head>
-			<ProductsListContainer>
+		// <GuestContainer>
+		<Head>
+			<title>Home</title>
+		</Head>
+		/* <ProductsListContainer>
 				<h2>Products</h2>
 				<ProductsList>
 					{products.map(product => (
@@ -45,7 +38,7 @@ const Home: React.FC<IHomeProps> = ({ products }) => {
 					))}
 				</ProductsList>
 			</ProductsListContainer>{' '}
-		</GuestContainer>
+		</GuestContainer> */
 	)
 }
 

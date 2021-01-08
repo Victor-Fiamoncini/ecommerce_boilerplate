@@ -11,14 +11,6 @@ import fromImageToUrl from '../../utils/fromImageToUrl'
 import formatMoney from '../../utils/formatMoney'
 
 import { IProduct } from '../../types/Product'
-import { IProduct as IProductOrderContext } from '../../context/OrderContext/types'
-
-import {
-	ProductItemContainer,
-	ProductItem,
-	BuyButton,
-} from '../../styles/pages/products/product'
-import { GuestContainer } from '../../styles/global'
 
 interface IProductProps {
 	product: IProduct
@@ -33,34 +25,34 @@ const Product: React.FC<IProductProps> = ({ product }) => {
 	const { buy } = useOrder()
 
 	const handleBuyButtonClick = useCallback(
-		async (product: IProductOrderContext) => {
+		async (productId: number) => {
 			const authToken = await getToken()
 
 			if (authToken) {
-				await buy(authToken, product)
+				await buy(authToken, productId)
 			}
 		},
 		[getToken, buy]
 	)
 
 	return (
-		<GuestContainer>
-			<Head>
-				<meta name="description" content={product.meta_description || ''} />
-				<title>{product.name}</title>
-			</Head>
-			<ProductItemContainer>
-				<h2>{product.name}</h2>
-				<ProductItem>
-					<img src={fromImageToUrl(product.image.url)} />
-					<strong>R$ {formatMoney(product.price)}</strong>
-					<p>{product.content}</p>
-					<BuyButton onClick={() => handleBuyButtonClick(product)}>
-						Buy
-					</BuyButton>
-				</ProductItem>
-			</ProductItemContainer>
-		</GuestContainer>
+		// <GuestContainer>
+		<Head>
+			<meta name="description" content={product.meta_description || ''} />
+			<title>{product.name}</title>
+		</Head>
+		// 	<ProductItemContainer>
+		// 		<h2>{product.name}</h2>
+		// 		<ProductItem>
+		// 			<img src={fromImageToUrl(product.image.url)} />
+		// 			<strong>R$ {formatMoney(product.price)}</strong>
+		// 			<p>{product.content}</p>
+		// 			<BuyButton onClick={() => handleBuyButtonClick(product.id)}>
+		// 				Buy
+		// 			</BuyButton>
+		// 		</ProductItem>
+		// 	</ProductItemContainer>
+		// </GuestContainer>
 	)
 }
 

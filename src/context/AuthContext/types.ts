@@ -12,4 +12,5 @@ export interface IAuthContextData {
 	loginUser: (email: string) => Promise<void>
 	logoutUser: () => Promise<void>
 	getToken: () => Promise<string | undefined>
+	loadSession: () => Promise<void>
 }

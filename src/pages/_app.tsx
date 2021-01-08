@@ -1,19 +1,15 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-
-import GlobalStyle from '../styles/global'
+import 'tailwindcss/tailwind.css'
 
 import AppProvider from '../context/AppProvider'
 import Header from '../components/header'
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-	return (
-		<AppProvider>
-			<Header />
-			<Component {...pageProps} />
-			<GlobalStyle />
-		</AppProvider>
-	)
-}
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
+	<AppProvider>
+		<Header />
+		<Component {...pageProps} />
+	</AppProvider>
+)
 
 export default MyApp

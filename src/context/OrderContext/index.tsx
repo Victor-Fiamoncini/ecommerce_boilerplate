@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useContext, useState } from 'react'
 
 import { strapiApi, stripeApi } from '../../services/apiClients'
 
-import { IOrderContextData, IOrderState, IProduct } from './types'
+import { IOrderContextData, IOrderState } from './types'
 
 const OrderContext = createContext<IOrderContextData>({} as IOrderContextData)
 
@@ -13,7 +13,9 @@ export const OrderProvider: React.FC = ({ children }) => {
 		async (authToken: string) => {
 			try {
 				const orders = await strapiApi.get('/orders', {
-					headers: { Authorization: `Bearer ${authToken}` },
+					headers: {
+						Authorization: `Bearer ${authToken}`,
+					},
 				})
 
 				setData({ ...data, orders: orders.data })
@@ -24,13 +26,21 @@ export const OrderProvider: React.FC = ({ children }) => {
 		[data]
 	)
 
-	const buy = useCallback(async (authToken: string, product: IProduct) => {
+	const buy = useCallback(async (authToken: string, productId: number) => {
 		const stripe = await stripeApi
 
 		const session = await strapiApi.post(
 			'/orders',
-			{ product },
-			{ headers: { Authorization: `Bearer ${authToken}` } }
+			{
+				product: {
+					id: productId,
+				},
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${authToken}`,
+				},
+			}
 		)
 
 		await stripe?.redirectToCheckout({ sessionId: session.data.id })

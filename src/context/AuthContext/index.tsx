@@ -67,8 +67,28 @@ export const AuthProvider: React.FC = ({ children }) => {
 		}
 	}, [data, router])
 
+	const loadSession = useCallback(async () => {
+		const isLogged = await magic?.user.isLoggedIn()
+
+		if (isLogged) {
+			const userMetadata = await magic?.user.getMetadata()
+
+			if (userMetadata?.email) {
+				setData({
+					...data,
+					user: {
+						email: userMetadata.email,
+						isAuthenticated: true,
+					},
+				})
+			}
+		}
+	}, [data])
+
 	useEffect(() => {
 		magic = new Magic(keys.MAGIC_PUBLIC_KEY)
+
+		loadSession()
 	}, []) // eslint-disable-line
 
 	return (
@@ -78,6 +98,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 				loginUser,
 				logoutUser,
 				getToken,
+				loadSession,
 			}}
 		>
 			{children}
