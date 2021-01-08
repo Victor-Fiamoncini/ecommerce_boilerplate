@@ -18,10 +18,10 @@ const Account: React.FC = () => {
 
 	useEffect(() => {
 		async function getAuthOrders() {
-			const token = await getToken()
+			const authToken = await getToken()
 
-			if (token) {
-				await getOrders(token)
+			if (authToken) {
+				await getOrders(authToken)
 			}
 		}
 

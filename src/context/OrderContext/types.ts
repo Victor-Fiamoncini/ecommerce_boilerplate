@@ -17,4 +17,5 @@ export interface IOrderState {
 export interface IOrderContextData {
 	orders: IOrder[]
 	getOrders: (authToken: string) => Promise<void>
+	buy: (authToken: string, product: IProduct) => Promise<void>
 }

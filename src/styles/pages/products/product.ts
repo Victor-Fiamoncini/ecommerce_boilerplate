@@ -38,3 +38,19 @@ export const ProductItem = styled.li`
 		line-height: 1.2;
 	}
 `
+
+export const BuyButton = styled.button`
+	color: ${props => props.theme.colors.white};
+	background: ${props => props.theme.colors.primary};
+	border-radius: 22px;
+	padding: 16px;
+	margin-top: 16px;
+	font-weight: 600;
+	font-size: ${rem(18)};
+	width: 100%;
+	max-width: 180px;
+	transition: transform 0.3s;
+	&:hover {
+		transform: translateY(-2px);
+	}
+`

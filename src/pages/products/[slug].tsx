@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 
 import { strapiApi } from '../../services/apiClients'
+import { useOrder } from '../../context/OrderContext'
+import { useAuth } from '../../context/AuthContext'
 
 import fromImageToUrl from '../../utils/fromImageToUrl'
 import formatMoney from '../../utils/formatMoney'
 
+import { IProduct } from '../../types/Product'
+import { IProduct as IProductOrderContext } from '../../context/OrderContext/types'
+
 import {
 	ProductItemContainer,
 	ProductItem,
+	BuyButton,
 } from '../../styles/pages/products/product'
 import { GuestContainer } from '../../styles/global'
-
-import { IProduct } from '../../types/Product'
 
 interface IProductProps {
 	product: IProduct
@@ -25,6 +29,20 @@ interface IProductStaticPaths extends ParsedUrlQuery {
 }
 
 const Product: React.FC<IProductProps> = ({ product }) => {
+	const { getToken } = useAuth()
+	const { buy } = useOrder()
+
+	const handleBuyButtonClick = useCallback(
+		async (product: IProductOrderContext) => {
+			const authToken = await getToken()
+
+			if (authToken) {
+				await buy(authToken, product)
+			}
+		},
+		[getToken, buy]
+	)
+
 	return (
 		<GuestContainer>
 			<Head>
@@ -37,6 +55,9 @@ const Product: React.FC<IProductProps> = ({ product }) => {
 					<img src={fromImageToUrl(product.image.url)} />
 					<strong>R$ {formatMoney(product.price)}</strong>
 					<p>{product.content}</p>
+					<BuyButton onClick={() => handleBuyButtonClick(product)}>
+						Buy
+					</BuyButton>
 				</ProductItem>
 			</ProductItemContainer>
 		</GuestContainer>

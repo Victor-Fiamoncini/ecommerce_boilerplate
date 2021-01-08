@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { loadStripe } from '@stripe/stripe-js'
 
-import { STRAPI_API_URL } from '../config/urls'
+import keys from '../config/keys'
 
-export const strapiApi = axios.create({
-	baseURL: STRAPI_API_URL,
-})
+export const strapiApi = axios.create({ baseURL: keys.STRAPI_API_URL })
+
+export const stripeApi = loadStripe(keys.STRIPE_SK, { locale: 'pt-BR' })

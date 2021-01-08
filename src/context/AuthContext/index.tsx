@@ -8,7 +8,7 @@ import React, {
 import { useRouter } from 'next/router'
 import { Magic } from 'magic-sdk'
 
-import { MAGIC_PUBLIC_KEY } from '../../config/urls'
+import keys from '../../config/keys'
 
 import { IAuthContextData, IAuthState } from './types'
 
@@ -68,7 +68,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 	}, [data, router])
 
 	useEffect(() => {
-		magic = new Magic(MAGIC_PUBLIC_KEY)
+		magic = new Magic(keys.MAGIC_PUBLIC_KEY)
 	}, []) // eslint-disable-line
 
 	return (

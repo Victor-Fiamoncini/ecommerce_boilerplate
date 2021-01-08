@@ -1,6 +1,6 @@
 # Ecommerce Boilerplate 🛍
 
-React/Next/Strapi ecommerce boilerplate
+Simple ReactJS/NextJS ecommerce boilerplate, with Strapi CMS & Magic authentication.
 
 ----------
 Released in 2021. This project is under the MIT license.

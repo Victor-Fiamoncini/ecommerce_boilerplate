@@ -1,9 +1,11 @@
-import { STRAPI_API_URL } from '../config/urls'
+import keys from '../config/keys'
 
-export default function fromImageToUrl(url: string): string {
+function fromImageToUrl(url: string): string {
 	if (url.startsWith('http') || url.startsWith('//')) {
 		return url
 	}
 
-	return `${STRAPI_API_URL}${url}`
+	return `${keys.STRAPI_API_URL}${url}`
 }
+
+export default fromImageToUrl
