@@ -1,33 +1,55 @@
 import React, { MouseEvent, useCallback } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/dist/client/router'
+import { FaSignInAlt, FaSignOutAlt, FaUserAlt } from 'react-icons/fa'
 
 import { useAuth } from '../context/AuthContext'
 
 const Header: React.FC = () => {
-	const { pathname } = useRouter()
-
 	const { user, logoutUser } = useAuth()
 
 	const handleLogoutFormSubmit = useCallback(
-		(event: MouseEvent<HTMLAnchorElement>) => {
+		async (event: MouseEvent<HTMLAnchorElement>) => {
 			event.preventDefault()
 
-			logoutUser()
+			await logoutUser()
 		},
 		[logoutUser]
 	)
 
 	return (
-		<div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-			<div className="flex-shrink-0">
-				<img className="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo" />
+		<header className="p-4 bg-purple-600">
+			<div className="container m-auto">
+				<div className="flex justify-between align-middle">
+					<Link href="/">
+						<a className="text-center text-2xl font-bold text-white">
+							<h1>Ecommerce Boilerplate</h1>
+						</a>
+					</Link>
+					<div className="flex justify-center align-middle mt-1">
+						{user?.isAuthenticated ? (
+							<>
+								<Link href="/account">
+									<a className="mr-4 text-white" title={user?.email}>
+										<FaUserAlt size={22} />
+									</a>
+								</Link>
+								<Link href="/">
+									<a className="text-white" onClick={handleLogoutFormSubmit}>
+										<FaSignOutAlt size={22} />
+									</a>
+								</Link>
+							</>
+						) : (
+							<Link href="/login">
+								<a className="text-white">
+									<FaSignInAlt size={22} />
+								</a>
+							</Link>
+						)}
+					</div>
+				</div>
 			</div>
-			<div>
-				<div className="text-xl font-medium text-black">ChitChat</div>
-				<p className="text-gray-500">You have a new message!</p>
-			</div>
-		</div>
+		</header>
 	)
 }
 
