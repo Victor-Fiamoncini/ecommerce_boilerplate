@@ -21,11 +21,18 @@ const Account: React.FC = () => {
 	}, []) // eslint-disable-line
 
 	return (
-		// <GuestContainer>
-		<Head>
-			<meta name="description" content="The account page, view your orders" />
-			<title>Account - {user?.email}</title>
-		</Head>
+		<div>
+			<Head>
+				<meta name="description" content="The account page, view your orders" />
+				<title>Account - {user?.email}</title>
+			</Head>
+			<h2 className="mb-6 text-3xl text-center font-bold text-purple-600">
+				Account
+			</h2>
+			<p>
+				Logged as <strong>{user?.email}</strong>
+			</p>
+		</div>
 		// {/* <AccountContainer> */}
 		// 		<h2>Account</h2>
 		// 		<p>

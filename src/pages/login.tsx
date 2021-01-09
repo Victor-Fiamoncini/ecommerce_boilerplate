@@ -18,25 +18,31 @@ const Login: React.FC = () => {
 	)
 
 	return (
-		// <GuestContainer>
-		<Head>
-			<meta name="description" content="Login here to make your purchase" />
-			<title>Login</title>
-		</Head>
-		// 	<LoginContainer>
-		// 		<h2>Login</h2>
-		// 		<form onSubmit={handleLoginFormSubmit}>
-		// 			<input
-		// 				type="email"
-		// 				name="email"
-		// 				placeholder="Email Address"
-		// 				value={email}
-		// 				onChange={event => setEmail(event.target.value)}
-		// 			/>
-		// 			<button type="submit">Login</button>
-		// 		</form>
-		// 	</LoginContainer>
-		// </GuestContainer>
+		<div>
+			<Head>
+				<meta name="description" content="Login here to make your purchase" />
+				<title>Login</title>
+			</Head>
+			<h2 className="mb-6 text-3xl text-center font-bold text-purple-600">
+				Login
+			</h2>
+			<form onSubmit={handleLoginFormSubmit} className="text-center">
+				<input
+					type="email"
+					name="email"
+					placeholder="Email Address"
+					value={email}
+					onChange={event => setEmail(event.target.value)}
+					className="py-2 px-4 text-lg font-semibold rounded-l-xl shadow-lg bg-gray-100"
+				/>
+				<button
+					type="submit"
+					className="w-32 p-2 text-lg font-semibold rounded-r-xl shadow-lg bg-purple-600 text-white"
+				>
+					Login
+				</button>
+			</form>
+		</div>
 	)
 }
 

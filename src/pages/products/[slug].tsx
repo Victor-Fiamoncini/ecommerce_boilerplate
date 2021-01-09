@@ -56,7 +56,7 @@ const Product: React.FC<IProductProps> = ({ product }) => {
 							<button
 								type="button"
 								onClick={() => handleBuyButtonClick(product.id)}
-								className="w-44 p-2 text-3xl font-semibold bg-purple-600 text-white rounded-2xl transform transition-all hover:shadow-lg hover:-translate-x-2"
+								className="w-44 p-2 text-3xl font-semibold bg-purple-600 text-white rounded-2xl transform transition-all hover:shadow-lg hover:-translate-y-2"
 							>
 								Buy
 							</button>

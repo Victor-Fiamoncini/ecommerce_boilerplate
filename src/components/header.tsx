@@ -21,7 +21,10 @@ const Header: React.FC = () => {
 			<div className="container m-auto">
 				<div className="flex justify-between align-middle">
 					<Link href="/">
-						<a className="text-center text-3xl font-bold text-white">
+						<a
+							className="text-center text-3xl font-bold text-white"
+							title="Ecommerce Boilerplate"
+						>
 							<h1>Ecommerce Boilerplate</h1>
 						</a>
 					</Link>
@@ -29,19 +32,23 @@ const Header: React.FC = () => {
 						{user?.isAuthenticated ? (
 							<>
 								<Link href="/account">
-									<a className="mr-4 text-white" title={user?.email}>
+									<a className="mr-6 text-white" title={user?.email}>
 										<FaUserAlt size={22} />
 									</a>
 								</Link>
 								<Link href="/">
-									<a className="text-white" onClick={handleLogoutFormSubmit}>
+									<a
+										className="text-white"
+										onClick={handleLogoutFormSubmit}
+										title="Logout"
+									>
 										<FaSignOutAlt size={22} />
 									</a>
 								</Link>
 							</>
 						) : (
 							<Link href="/login">
-								<a className="text-white">
+								<a className="text-white" title="Login">
 									<FaSignInAlt size={22} />
 								</a>
 							</Link>
