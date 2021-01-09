@@ -29,37 +29,46 @@ const Account: React.FC = () => {
 			<h2 className="mb-6 text-3xl text-center font-bold text-purple-600">
 				Account
 			</h2>
-			<p>
-				Logged as <strong>{user?.email}</strong>
+			<p className="mb-6 font-semibold text-center">
+				Logged as <strong className="text-purple-600">{user?.email}</strong>
 			</p>
+			{!!orders.length && (
+				<div>
+					<h3 className="mb-6 text-3xl text-center font-bold text-purple-600">
+						Orders
+					</h3>
+					<ul className="text-center">
+						{orders.map((order, index) => (
+							<li
+								key={order.id}
+								className={`block m-auto p-2 max-w-xs bg-gray-100 rounded-xl ${
+									index !== orders.length - 1 && 'mb-4'
+								}`}
+							>
+								<header className="mb-2">
+									<strong className="text-purple-600">
+										{order.product.name}
+									</strong>
+								</header>
+								<div className="flex justify-around mb-2">
+									<strong>R$ {order.total}</strong>
+									<strong>
+										{new Date(order.created_at).toLocaleDateString('pt-BR')}
+									</strong>
+								</div>
+								<p
+									className={`inline-block font-semibold p-4 py-0 text-white rounded-2xl ${
+										order.status === 'paid' ? 'bg-green-500' : 'bg-yellow-500'
+									}`}
+								>
+									{order.status}
+								</p>
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
 		</div>
-		// {/* <AccountContainer> */}
-		// 		<h2>Account</h2>
-		// 		<p>
-		// 			Logged as <strong>{user?.email}</strong>
-		// 		</p>
-		// 		<OrdersListContainer>
-		// 			<h3>Orders</h3>
-		// 			<OrdersList>
-		// 				{!!orders.length &&
-		// 					orders.map(order => (
-		// 						<OrdersListItem key={order.id} paid={order.status === 'paid'}>
-		// 							<header>
-		// 								<strong>{order.product.name}</strong>
-		// 							</header>
-		// 							<div>
-		// 								<strong>R$ {order.total}</strong>
-		// 								<strong>
-		// 									{new Date(order.created_at).toLocaleDateString('pt-BR')}
-		// 								</strong>
-		// 							</div>
-		// 							<p>{order.status}</p>
-		// 						</OrdersListItem>
-		// 					))}
-		// 			</OrdersList>
-		// 		</OrdersListContainer>
-		// 	</AccountContainer>
-		// </GuestContainer>
 	)
 }
 
