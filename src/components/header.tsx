@@ -21,7 +21,7 @@ const Header: React.FC = () => {
 			<div className="container m-auto">
 				<div className="flex justify-between align-middle">
 					<Link href="/">
-						<a className="text-center text-2xl font-bold text-white">
+						<a className="text-center text-3xl font-bold text-white">
 							<h1>Ecommerce Boilerplate</h1>
 						</a>
 					</Link>

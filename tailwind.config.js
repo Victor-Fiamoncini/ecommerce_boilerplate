@@ -11,6 +11,7 @@ module.exports = {
 		colors: {
 			purple: colors.violet,
 			white: colors.white,
+			gray: colors.gray,
 		},
 		fontFamily: {
 			sans: ['Graphik', 'sans-serif'],
@@ -24,6 +25,7 @@ module.exports = {
 			borderRadius: {
 				'4xl': '2rem',
 			},
+			translate: ['active', 'hover', 'group-hover'],
 		},
 	},
 }

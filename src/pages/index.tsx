@@ -14,33 +14,41 @@ interface IHomeProps {
 	products: IProduct[]
 }
 
-const Home: React.FC<IHomeProps> = ({ products }) => {
-	return (
-		// <GuestContainer>
+const Home: React.FC<IHomeProps> = ({ products }) => (
+	<div>
 		<Head>
 			<title>Home</title>
 		</Head>
-		/* <ProductsListContainer>
-				<h2>Products</h2>
-				<ProductsList>
-					{products.map(product => (
-						<ProductListItem key={product.id}>
-							<Link href={`/products/${product.slug}`}>
-								<a>
-									<div>
-										<img src={fromImageToUrl(product.image.url)} />
-										<p>{product.name}</p>
-										<strong>R$ {formatMoney(product.price)}</strong>
-									</div>
-								</a>
-							</Link>
-						</ProductListItem>
-					))}
-				</ProductsList>
-			</ProductsListContainer>{' '}
-		</GuestContainer> */
-	)
-}
+		<h2 className="mb-6 text-3xl text-center font-bold text-purple-600">
+			Products Available
+		</h2>
+		<ul className="flex justify-between align-middle">
+			{products.map(product => (
+				<li
+					key={product.id}
+					className="block max-w-lg w-80 bg-gray-100 rounded-2xl p-4 mb-2 transform transition-all hover:shadow-lg hover:-translate-y-2"
+				>
+					<Link href={`/products/${product.slug}`}>
+						<a className="">
+							<div className="rounded-2xl">
+								<img
+									src={fromImageToUrl(product.image.url)}
+									className="rounded-2xl mb-2"
+								/>
+								<p className="text-center font-semibold text-purple-600 text-lg mb-2">
+									{product.name}
+								</p>
+								<strong className="block text-center text-gray-900 text-lg">
+									R$ {formatMoney(product.price)}
+								</strong>
+							</div>
+						</a>
+					</Link>
+				</li>
+			))}
+		</ul>
+	</div>
+)
 
 export const getStaticProps: GetStaticProps = async () => {
 	const products = await strapiApi.get<IProduct[]>('/products')

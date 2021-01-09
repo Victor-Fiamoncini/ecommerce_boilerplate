@@ -8,7 +8,9 @@ import Header from '../components/header'
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 	<AppProvider>
 		<Header />
-		<Component {...pageProps} />
+		<div className="container m-auto py-6">
+			<Component {...pageProps} />
+		</div>
 	</AppProvider>
 )
 
